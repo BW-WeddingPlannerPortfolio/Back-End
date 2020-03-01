@@ -3,7 +3,8 @@ const db = require('../data/dbConfig.js');
 module.exports = {
     getWeddings,
     getWeddingsById,
-    getPlanners
+    getPlanners, 
+    getPlannerById
 }
 
 function getWeddings() {
@@ -16,4 +17,8 @@ function getWeddingsById(id) {
 
 function getPlanners() {
     return db('planners');
+}
+
+function getPlannerById(id) {
+    return db('planners').where({ id })
 }

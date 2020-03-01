@@ -43,4 +43,18 @@ router.get('/planners', (req, res) => {
         })
 })
 
+// returns a single planner object according to its id
+router.get('/planners/:id', (req, res) => {
+    const id = req.params.id;
+
+    Public.getPlannerById(id)
+        .then(planner => {
+            res.status(200).json(planner)
+        })
+        .catch(err => {
+            console.log('error getting planner by id', err)
+            res.status(500).json({ errorMessage: 'Could not get find this wedding planner' })
+        })
+})
+
 module.exports = router;
