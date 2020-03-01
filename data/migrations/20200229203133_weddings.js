@@ -18,6 +18,8 @@ exports.up = function(knex) {
   .createTable('weddings', tbl => {
       tbl.increments();
 
+      tbl.integer('planner_id').unsigned().notNullable().references('id').inTable('planners').onDelete('CASCADE').onDelete('CASCADE');
+
       tbl.string('wedding_name', 130).notNullable().index();
 
       tbl.string('wedding_photo', 130).notNullable().index();
@@ -29,20 +31,10 @@ exports.up = function(knex) {
       tbl.string('description', 300).notNullable();
 
   })
-
-  .createTable('planners_weddings', tbl => {
-      tbl.increments();
-
-      tbl.integer('wedding_id').unsigned().notNullable().references('id').inTable('weddings').onDelete('CASCADE').onUpdate('CASCADE');
-
-      tbl.integer('planner_id').unsigned().notNullable().references('id').inTable('planners').onDelete('RESTRICT').onUpdate('CASCADE');
-  })
-
 };
 
 exports.down = function(knex) {
   return knex.schema    
-    .dropTableIfExists('planners_weddings')
     .dropTableIfExists('weddings')
     .dropTableIfExists('planners');
 };
