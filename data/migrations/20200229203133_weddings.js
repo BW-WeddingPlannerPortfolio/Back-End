@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-  return knex.schema.createTable('weddings', tbl => {
+  return knex.schema.createTable('planners', tbl => {
       tbl.increments();
 
       tbl.string('username', 130).notNullable().unique().index();
@@ -15,7 +15,7 @@ exports.up = function(knex) {
 
   })
 
-  .createTable('planners', tbl => {
+  .createTable('weddings', tbl => {
       tbl.increments();
 
       tbl.string('wedding_name', 130).notNullable().index();
@@ -43,6 +43,6 @@ exports.up = function(knex) {
 exports.down = function(knex) {
   return knex.schema    
     .dropTableIfExists('planners_weddings')
-    .dropTableIfExists('planners')
-    .dropTableIfExists('weddings');
+    .dropTableIfExists('weddings')
+    .dropTableIfExists('planners');
 };
