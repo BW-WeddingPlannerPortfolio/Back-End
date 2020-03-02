@@ -19,7 +19,7 @@ server.use('/api/planner', authentication, privateRouter);
 server.use('/api/auth', authRouter);
 
 server.get('/', (req, res) => {
-    res.send('<h1>Welcome to Wedding Planner Portfolio, for documentation, please visit: </h1>')
+    res.send('<h1>Welcome to Wedding Planner Portfolio, for documentation, please visit: https://github.com/BW-WeddingPlannerPortfolio/Back-End </h1>')
 });
 
 function logger (req, res, next) {
