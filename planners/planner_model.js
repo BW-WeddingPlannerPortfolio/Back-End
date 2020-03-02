@@ -4,7 +4,12 @@ module.exports = {
     getPlannerById,
     add,
     findBy,
-    editPlanner
+    editPlanner,
+    getMyWeddings,
+    getMyWeddingsById,
+    addWedding,
+    editWedding,
+    deleteWedding
 }
 
 function getPlannerById(id) {
@@ -25,4 +30,24 @@ function findBy(filter) {
 
 function editPlanner(id, changes) {
     return db('planners').where('id', id).update(changes);
+}
+
+function getMyWeddings(id) {
+    return db('weddings').where('weddings.planner_id', id);
+}
+
+function getMyWeddingsById(id) {
+    return db('weddings').where('id', id);
+}
+
+function addWedding(info) {
+    return db('weddings').insert(info, 'weddings.planner_id');
+}
+
+function editWedding(id, changes) {
+    return db('weddings').where('id', id).update(changes);
+}
+
+function deleteWedding(id) {
+    return db('weddings').where('id', id).del();
 }
