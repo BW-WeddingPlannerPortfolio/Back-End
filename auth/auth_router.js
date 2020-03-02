@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 const Planners = require('../planners/planner_model.js');
 const secrets = require('../configs/secrets.js');
 
+//creates a new user (wedding planner)
 router.post('/register', (req, res) => {
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 8);
@@ -17,13 +18,16 @@ router.post('/register', (req, res) => {
     Planners.add(user)
         .then(newUser => {
             res.status(201).json(newUser)
+
         })
         .catch(err => {
             console.log('error creating a new user', err)
             res.status(500).json({ errorMessage: 'error creating a new wedding planner' })
         })
+       
 })
 
+//logs in a current wedding planner
 router.post('/login', (req, res) => {
     let {username, password} = req.body;
 
