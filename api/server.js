@@ -12,6 +12,7 @@ const server = express();
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
+server.use(logger);
 
 server.use('/api', publicRouter);
 server.use('/api/private', authentication, privateRouter);
@@ -20,5 +21,11 @@ server.use('/api/auth', authRouter);
 server.get('/', (req, res) => {
     res.send('<h1>Welcome to Wedding Planner Portfolio, for documentation, please visit: </h1>')
 });
+
+function logger (req, res, next) {
+    const {method, originalUrl} = req;
+    console.log(`${method} to ${originalUrl}`);
+    next();
+}
 
 module.exports = server;
