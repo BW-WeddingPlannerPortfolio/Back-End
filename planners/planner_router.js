@@ -4,6 +4,7 @@ const router = express.Router();
 
 const Profile = require('./planner_model.js');
 
+// retrieves the logged in wedding planner
 router.get('/:id', (req, res) => {
     const id = req.params.id;
 
@@ -17,6 +18,7 @@ router.get('/:id', (req, res) => {
         })
 })
 
+// edits the logged in wedding planner's profile information
 router.put('/:id', (req, res) => {
     let id = req.params.id;
     let updatedPlanner = req.body;
@@ -32,6 +34,7 @@ router.put('/:id', (req, res) => {
         })
 })
 
+// retrieves a list of weddings for logged in wedding planner
 router.get('/:id/weddings', (req, res) => {
     const id = req.params.id;
     Profile.getMyWeddings(id)
@@ -44,7 +47,7 @@ router.get('/:id/weddings', (req, res) => {
         })
 })
 
-
+// retrieves specified wedding (by id) for logged in wedding planner
 router.get('/weddings/:id', (req, res) => {
     const id = req.params.id;
     Profile.getMyWeddingsById(id)
@@ -57,6 +60,7 @@ router.get('/weddings/:id', (req, res) => {
         })
 })
 
+// creates a new wedding for logged in wedding planner
 router.post('/weddings', (req, res) => {
     const wedding = {...req.body}
 
@@ -70,6 +74,7 @@ router.post('/weddings', (req, res) => {
         })
 })
 
+// edits a wedding (by id) for logged in wedding planner 
 router.put('/weddings/:id', (req, res) => {
     const id = req.params.id;
     const updateWedding = req.body;
@@ -83,6 +88,7 @@ router.put('/weddings/:id', (req, res) => {
         })
 })
 
+// deletes a wedding (by id) for logged in wedding planner
 router.delete('/weddings/:id', (req, res) => {
     const id = req.params.id;
     
