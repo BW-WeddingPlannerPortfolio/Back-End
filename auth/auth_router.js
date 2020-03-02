@@ -17,7 +17,8 @@ router.post('/register', (req, res) => {
 
     Planners.add(user)
         .then(newUser => {
-            res.status(201).json(newUser)
+            const token = generateToken(newUser)
+            res.status(201).json({ newUser, token})
 
         })
         .catch(err => {
