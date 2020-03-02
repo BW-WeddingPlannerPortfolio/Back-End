@@ -15,7 +15,7 @@ server.use(express.json());
 server.use(logger);
 
 server.use('/api', publicRouter);
-server.use('/api/private', authentication, privateRouter);
+server.use('/api/planner', authentication, privateRouter);
 server.use('/api/auth', authRouter);
 
 server.get('/', (req, res) => {

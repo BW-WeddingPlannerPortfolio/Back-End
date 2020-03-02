@@ -3,7 +3,8 @@ const db = require('../data/dbConfig.js');
 module.exports = {
     getPlannerById,
     add,
-    findBy
+    findBy,
+    editPlanner
 }
 
 function getPlannerById(id) {
@@ -20,4 +21,8 @@ function add(user) {
 
 function findBy(filter) {
     return db('planners').where(filter).first();
+}
+
+function editPlanner(id, changes) {
+    return db('planners').where('id', id).update(changes);
 }
