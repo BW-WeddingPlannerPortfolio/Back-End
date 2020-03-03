@@ -7,7 +7,7 @@ exports.up = function(knex) {
 
       tbl.string('password', 130).notNullable();
 
-      tbl.string('profile_pic', 130);
+      tbl.text('profile_pic');
 
       tbl.string('home_location', 100).notNullable().index();
 
@@ -28,7 +28,7 @@ exports.up = function(knex) {
 
       tbl.string('wedding_location', 100).notNullable().index();
 
-      tbl.string('description', 300).notNullable();
+      tbl.text('description').notNullable();
 
   })
 };
