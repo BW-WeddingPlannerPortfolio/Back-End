@@ -34,7 +34,7 @@ function add(user) {
     return db('planners').insert(user, 'id')
     .then(ids => {
         const [id] = ids;
-        return getPlannerById(id).first();
+        return getPlannerById(id)
     })
 }
 
