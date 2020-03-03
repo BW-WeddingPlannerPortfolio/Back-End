@@ -12,13 +12,13 @@ const secrets = require('../configs/secrets.js');
 //creates a new user (wedding planner)
 router.post('/register', (req, res) => {
     let user = req.body;
-    // const hash = bcrypt.hashSync(user.password, 8);
-    // user.password = hash;
+    const hash = bcrypt.hashSync(user.password, 8);
+    user.password = hash;
 
     Planners.add(user)
         .then(newUser => {
-            // const token = generateToken(newUser)
-            // res.status(201).json({ newUser, token})
+            const token = generateToken(newUser)
+            res.status(201).json({ newUser, token})
             res.status(201).json(newUser)
 
         })
