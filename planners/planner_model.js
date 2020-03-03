@@ -12,9 +12,23 @@ module.exports = {
     deleteWedding
 }
 
-function getPlannerById(id) {
-    return db('planners').where({ id })
+async function getPlannerById(id) {
+    const planner = await db('planners as p').where({ id }).select('p.id', 'p.username', 'p.profile_pic', 'p.home_location', 'p.email').first();
+
+    const weddings = await db.from('weddings as w').where('w.planner_id', id)
+    
+    const profile = {
+        planner,
+        weddings: weddings
+    }
+    return profile;
 }
+
+
+
+// function getPlannerById(id) {
+//     return db('planners').where({ id })
+// }
 
 function add(user) {
     return db('planners').insert(user, 'id')
