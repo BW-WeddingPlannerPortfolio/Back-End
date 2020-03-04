@@ -6,7 +6,7 @@ const Profile = require('./planner_model.js');
 const db = require('../data/dbConfig.js');
 
 // retrieves the logged in wedding planner
-router.get('/:id', (req, res) => {
+router.get('/:id', validateId, (req, res) => {
     const id = req.params.id;
 
     Profile.getPlannerById(id)
@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
 })
 
 // edits the logged in wedding planner's profile information
-router.put('/:id', validateProfileEdit, (req, res) => {
+router.put('/:id', validateProfileEdit, validateId, (req, res) => {
     let id = req.params.id;
     let updatedPlanner = req.body;
 
@@ -36,7 +36,7 @@ router.put('/:id', validateProfileEdit, (req, res) => {
 })
 
 // retrieves a list of weddings for logged in wedding planner
-router.get('/:id/weddings', (req, res) => {
+router.get('/:id/weddings', validateId, (req, res) => {
     const id = req.params.id;
     Profile.getMyWeddings(id)
         .then(weddings => {
@@ -132,6 +132,7 @@ function validateEditWedding(req, res, next) {
         })
 }
 
+// validates that the profile 
 function validateProfileEdit(req, res, next) {
     const input = req.body;
 
@@ -149,13 +150,32 @@ function validateProfileEdit(req, res, next) {
         db('planners').where('username', input.username)
             .then(user => {
                 if(user.length === 0) {
-                    next();
+                    res.status(400).json({ message: 'cannot find this user' })
+                    
                 } else {
-                    res.status(400).json({ message: 'username already exists' })
+                    next();
                 }
             })
     }
 
+}
+
+// checks to see if this id exists
+function validateId(req, res, next) {
+    const id = req.params.id;
+
+    if(!id) {
+        res.status(400).json({ message: 'planner id not provided' })
+    } else {
+        db('planners').where('id', id)
+            .then(planner => {
+                if(planner.length === 0) {
+                    res.status(400).json({ message: 'planner does not exist' })
+                } else {
+                    next();
+                }
+            })
+    }
 }
 
 module.exports = router;
