@@ -48,6 +48,7 @@ router.post('/login', validateLogin, (req, res) => {
         })
 })
 
+// validates login fields and their character length
 function validateLogin(req, res, next) {
     const input = req.body;
 
@@ -62,6 +63,7 @@ function validateLogin(req, res, next) {
     }
 }
 
+// validates signup fields and their character length
 function validateSignup(req, res, next) {
     const input = req.body;
 
@@ -88,6 +90,7 @@ function validateSignup(req, res, next) {
 
 }
 
+// validates that an email is unique
 function validateEmail(req, res, next) {
     const input = req.body;
 
