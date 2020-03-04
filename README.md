@@ -57,11 +57,11 @@ Response 201 Created
 
 | Field | Type | Required? | Description |
 |---|---|---|---|
-| username | *string* | **yes** | Must be unique |
-| password | *string* | **yes** | Will have requirements later|
+| username | *string* | **yes** | Must be unique, must be at least 5 characters |
+| password | *string* | **yes** | must have at least 5 characters|
 | profile_pic | *string* | no | This gets stored and returned as a string|
-| home_location | *string* | **yes** | |
-| email | *string* | **yes** | Will have requirments later | 
+| home_location | *string* | **yes** | must have at least 2 characters |
+| email | *string* | **yes** | Must be unique, must be at least 5 characters | 
 
 Example: 
 ```
