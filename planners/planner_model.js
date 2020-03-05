@@ -30,6 +30,7 @@ async function getPlannerById(id) {
 //     return db('planners').where({ id })
 // }
 
+
 function add(user) {
     return db('planners').insert(user, 'id')
     .then(ids => {
