@@ -22,7 +22,7 @@ exports.up = function(knex) {
 
       tbl.string('wedding_name', 130).notNullable().index();
 
-      tbl.string('wedding_photo', 130).notNullable().index();
+      tbl.text('wedding_photo').notNullable().index();
 
       tbl.string('theme', 80).notNullable().index();
 
