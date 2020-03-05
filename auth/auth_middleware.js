@@ -11,6 +11,7 @@ module.exports = (req, res, next) => {
                 console.log('error verifying token', err);
                 res.status(401).json({ message: 'could not verify credentials' })
             } else {
+                // console.log(req)
                 req.user = decodedToken.user;
                 next();
             }

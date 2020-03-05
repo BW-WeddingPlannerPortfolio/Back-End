@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const Public = require('./public_model.js');
+const db = require('../data/dbConfig.js');
 
 // returns an array of all weddings
 router.get('/weddings', (req, res) => {
@@ -17,7 +18,7 @@ router.get('/weddings', (req, res) => {
 })
 
 // returns a single wedding object according to its id
-router.get('/weddings/:id', (req, res) => {
+router.get('/weddings/:id', validateWeddingId, (req, res) => {
     const id = req.params.id;
 
     Public.getWeddingsById(id)
@@ -44,7 +45,7 @@ router.get('/planners', (req, res) => {
 })
 
 // returns a single planner object according to its id
-router.get('/planners/:id', (req, res) => {
+router.get('/planners/:id', validateId, (req, res) => {
     const id = req.params.id;
 
     Public.getPlannerById(id)
@@ -56,5 +57,40 @@ router.get('/planners/:id', (req, res) => {
             res.status(500).json({ errorMessage: 'Could not get find this wedding planner' })
         })
 })
+
+// checks to see if this id exists
+function validateId(req, res, next) {
+    const id = req.params.id;
+
+    if(!id) {
+        res.status(400).json({ message: 'planner id not provided' })
+    } else {
+        db('planners').where('id', id)
+            .then(planner => {
+                if(planner.length === 0) {
+                    res.status(400).json({ message: 'planner does not exist' })
+                } else {
+                    next();
+                }
+            })
+    }
+}
+
+function validateWeddingId(req, res, next) {
+    const id = req.params.id;
+
+    if(!id) {
+        res.status(400).json({ message: 'planner id not provided' })
+    } else {
+        db('weddings').where('id', id)
+            .then(wedding => {
+                if(wedding.length === 0) {
+                    res.status(400).json({ message: 'wedding does not exist' })
+                } else {
+                    next();
+                }
+            })
+    }
+}
 
 module.exports = router;
