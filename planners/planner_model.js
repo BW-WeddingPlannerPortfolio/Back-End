@@ -58,7 +58,7 @@ function getMyWeddingsById(id) {
 }
 
 function addWedding(info) {
-    return db('weddings').insert(info, 'weddings.planner_id')
+    return db('weddings').insert(info, 'id')
     .then(ids => {
         const [id] = ids;
         return getMyWeddingsById(id).first()
