@@ -97,6 +97,10 @@ router.delete('/weddings/:id', (req, res) => {
         .then(deleted => {
             res.status(200).json({ message: 'Wedding has successfully been deleted' })
         })
+        .catch(err => {
+            console.log('error deleting', err)
+            res.status(500).json({ errorMessage: 'Wedding could not be deleted' })
+        })
 })
 
 // validates new wedding fields and their character length
