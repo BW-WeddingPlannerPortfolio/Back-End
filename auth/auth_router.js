@@ -18,8 +18,8 @@ router.post('/register', validateSignup, validateEmail, (req, res) => {
     Planners.add(user)
         .then(newUser => {
             const token = generateToken(newUser)
-            res.status(201).json({ newUser, token})
-            res.status(201).json(newUser)
+            console.log(newUser)
+            res.status(201).json({ message: `Welcome ${newUser.planner.username}!`, newUser, token})
 
         })
         .catch(err => {
