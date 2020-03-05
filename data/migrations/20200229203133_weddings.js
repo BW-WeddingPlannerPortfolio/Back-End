@@ -20,13 +20,13 @@ exports.up = function(knex) {
 
       tbl.integer('planner_id').unsigned().notNullable().references('id').inTable('planners').onDelete('CASCADE').onDelete('CASCADE');
 
-      tbl.string('wedding_name', 130).notNullable().index();
+      tbl.string('wedding_name', 300).notNullable().index();
 
       tbl.text('wedding_photo').notNullable().index();
 
-      tbl.string('theme', 80).notNullable().index();
+      tbl.string('theme', 100).notNullable().index();
 
-      tbl.string('wedding_location', 100).notNullable().index();
+      tbl.string('wedding_location', 200).notNullable().index();
 
       tbl.text('description').notNullable();
 
