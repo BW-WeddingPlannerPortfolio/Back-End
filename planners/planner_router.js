@@ -20,7 +20,7 @@ router.get('/:id', validateId, (req, res) => {
 })
 
 // edits the logged in wedding planner's profile information
-router.put('/:id', validateProfileEdit, validateId, (req, res) => {
+router.put('/:id', validateProfileEdit, (req, res) => {
     let id = req.params.id;
     let updatedPlanner = req.body;
 
@@ -36,7 +36,7 @@ router.put('/:id', validateProfileEdit, validateId, (req, res) => {
 })
 
 // retrieves a list of weddings for logged in wedding planner
-router.get('/:id/weddings', validateId, (req, res) => {
+router.get('/:id/weddings', (req, res) => {
     const id = req.params.id;
     Profile.getMyWeddings(id)
         .then(weddings => {
@@ -76,7 +76,7 @@ router.post('/weddings', validateNewWedding, (req, res) => {
 })
 
 // edits a wedding (by id) for logged in wedding planner 
-router.put('/weddings/:id', validateNewWedding, validateEditWedding, (req, res) => {
+router.put('/weddings/:id', validateNewWedding, (req, res) => {
     const id = req.params.id;
     const updateWedding = req.body;
 
@@ -147,15 +147,16 @@ function validateProfileEdit(req, res, next) {
     } else if (input.email.length < 5) {
         res.status(400).json({ message: 'your email must be at least 5 characters long' })
     } else {
-        db('planners').where('username', input.username)
-            .then(user => {
-                if(user.length === 0) {
-                    res.status(400).json({ message: 'cannot find this user' })
+        next();
+        // db('planners').where('username', input.username)
+        //     .then(user => {
+        //         if(user.length === 0) {
+        //             res.status(400).json({ message: 'cannot find this user' })
                     
-                } else {
-                    next();
-                }
-            })
+        //         } else {
+        //             next();
+        //         }
+        //     })
     }
 
 }
