@@ -63,7 +63,7 @@ router.get('/weddings/:id', (req, res) => {
 
 // creates a new wedding for logged in wedding planner
 router.post('/weddings', validateNewWedding, (req, res) => {
-    const wedding = {...req.body}
+    const wedding = req.body;
 
     Profile.addWedding(wedding)
         .then(wed => {
