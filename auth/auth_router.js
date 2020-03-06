@@ -37,7 +37,7 @@ router.post('/login', validateLogin, (req, res) => {
         .then(planner => {
             if(planner && bcrypt.compareSync(password, planner.password)) {
                 const token = generateToken(planner)
-                res.status(201).json({ message: `Welcome Back ${planner.username}!`, token })
+                res.status(201).json({ message: `Welcome Back ${planner.username}!`, planner, token })
             } else {
                 res.status(401).json({ message: 'Please provide valid credentials' })
             }
