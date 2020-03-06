@@ -58,7 +58,7 @@ Response 201 Created
 | Field | Type | Required? | Description |
 |---|---|---|---|
 | username | *string* | **yes** | Must be unique, must be at least 5 characters |
-| password | *string* | **yes** | must have at least 5 characters|
+| password | *string* | **yes** | must have at least 5 characters |
 | profile_pic | *string* | no | This gets stored and returned as a string|
 | home_location | *string* | **yes** | must have at least 2 characters |
 | email | *string* | **yes** | Must be unique, must be at least 5 characters | 
@@ -112,11 +112,11 @@ Response 200 OK
 
 | Field | Type | Required? | Description |
 |---|---|---|---|
-| username | *string* | **yes** | Must be unique |
-| password | *string* | **yes** | Will have requirements later|
+| username | *string* | **yes** | Must be unique, must be at least 5 characters |
+| password | *string* | **yes** | must have at least 5 characters |
 | profile_pic | *string* | no | This gets stored and returned as a string|
-| home_location | *string* | **yes** | |
-| email | *string* | **yes** | Will have requirments later | 
+| home_location | *string* | **yes** | must have at least 2 characters |
+| email | *string* | **yes** | Must be unique, must be at least 5 characters | 
 
 Example: 
 ```
@@ -140,11 +140,11 @@ Response 201 Created
 | Field | Type | Required? | Description |
 |---|---|---|---|
 | planner_id | integer | **yes** | This is the id of the wedding planner |
-| wedding_name | *string* | **yes** | Will add requirements to this later | 
-| wedding_photo | *string* | **yes** | This is only photo for the wedding so far |
-| theme | *string* | **yes** | This is the theme of the wedding |
-| wedding_location | *string* | **yes** | This is the location of the wedding |
-| description | *string | **yes** | This is a medium-length description of the wedding |
+| wedding_name | *string* | **yes** | Must have at least 5 characters | 
+| wedding_photo | *string* | **yes** | This is the only photo for the wedding |
+| theme | *string* | **yes** | Must have at least 3 characters |
+| wedding_location | *string* | **yes** | Must be at least 2 characters |
+| description | *string | **yes** | Must be at least 10 characters |
 
 Example:
 ```
@@ -166,11 +166,11 @@ HTTP Request: **PUT** /api/planner/weddings/{id}
 | Field | Type | Required? | Description |
 |---|---|---|---|
 | planner_id | integer | **yes** | This is the id of the wedding planner |
-| wedding_name | *string* | **yes** | Will add requirements to this later | 
-| wedding_photo | *string* | **yes** | This is only photo for the wedding so far |
-| theme | *string* | **yes** | This is the theme of the wedding |
-| wedding_location | *string* | **yes** | This is the location of the wedding |
-| description | *string | **yes** | This is a medium-length description of the wedding |
+| wedding_name | *string* | **yes** | Must have at least 5 characters | 
+| wedding_photo | *string* | **yes** | This is the only photo for the wedding |
+| theme | *string* | **yes** | Must have at least 3 characters |
+| wedding_location | *string* | **yes** | Must be at least 2 characters |
+| description | *string | **yes** | Must be at least 10 characters |
 
 Example:
 ```
@@ -187,7 +187,7 @@ Example:
 [Back To Top](#wedding-planner-portfolio)
 
 ## Delete Wedding
-HTTP Request: **DELETE** /api/weddings/{id}
+HTTP Request: **DELETE** /api/planner/weddings/{id}
 
 Response 200 OK
 
