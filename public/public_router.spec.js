@@ -19,7 +19,114 @@ beforeEach(testPrep);
 // })
 
 // test for /api/weddings/id
+describe('Get a wedding by its id', () => {
+    it('GET /api/planner/weddings/:id', async() => {
 
+        //setup
+        const newUser = await request(server)
+            .post('/api/auth/register')
+            .send({
+                username: 'testing1',
+                password: 'testing1',
+                home_location: 'tester',
+                email: 'testing1@t.com'
+            })    
+
+        const loggedIn = await request(server)
+            .post('/api/auth/login')
+            .send({
+                username: 'testing1',
+                password: 'testing1'
+            })
+        
+        const newWedding = await request(server)
+            .post('/api/planner/weddings')
+            .send({
+                planner_id: 1,
+                wedding_name: 'test wedding',
+                wedding_photo: 'as;dofijoea;sijdfoejao;ijdf',
+                theme: 'tests',
+                wedding_location: 'somewhere',
+                description: 'Hopefully this test will work well!'
+            })
+            .set('Authorization', loggedIn.body.token)
+        
+        const anotherOne = await request(server)
+            .post('/api/planner/weddings')
+                .send({
+                    planner_id: 1,
+                    wedding_name: 'test wedding2',
+                    wedding_photo: 'as;dofijoea;sijdfoejao;ijdf',
+                    theme: 'tests',
+                    wedding_location: 'somewhere',
+                    description: 'Hopefully this test will work well!'
+                })
+                .set('Authorization', loggedIn.body.token)
+        
+        const single = await request(server)
+            .get('/api/weddings/2')
+
+        //tests
+        expect(single.status).toBe(200);
+        expect(single.body).toHaveLength(1);
+        expect(single.body[0]).toHaveProperty('wedding_name', 'test wedding2'); 
+
+    })
+    //tests id validation middleware
+    it('GET /api/planner/weddings/:id', async() => {
+
+        //setup
+        const newUser = await request(server)
+            .post('/api/auth/register')
+            .send({
+                username: 'testing1',
+                password: 'testing1',
+                home_location: 'tester',
+                email: 'testing1@t.com'
+            })    
+
+        const loggedIn = await request(server)
+            .post('/api/auth/login')
+            .send({
+                username: 'testing1',
+                password: 'testing1'
+            })
+        
+        const newWedding = await request(server)
+            .post('/api/planner/weddings')
+            .send({
+                planner_id: 1,
+                wedding_name: 'test wedding',
+                wedding_photo: 'as;dofijoea;sijdfoejao;ijdf',
+                theme: 'tests',
+                wedding_location: 'somewhere',
+                description: 'Hopefully this test will work well!'
+            })
+            .set('Authorization', loggedIn.body.token)
+        
+        const anotherOne = await request(server)
+            .post('/api/planner/weddings')
+                .send({
+                    planner_id: 1,
+                    wedding_name: 'test wedding2',
+                    wedding_photo: 'as;dofijoea;sijdfoejao;ijdf',
+                    theme: 'tests',
+                    wedding_location: 'somewhere',
+                    description: 'Hopefully this test will work well!'
+                })
+                .set('Authorization', loggedIn.body.token)
+        
+        const single = await request(server)
+            .get('/api/weddings/3')
+
+        //tests
+        expect(single.status).toBe(400);
+        expect(single.body).toBeDefined();
+        expect(single.body).toHaveProperty('message', 'wedding does not exist'); 
+
+    }) 
+    
+})
 // test for /api/planners
 describe('Get all planners', () => {
     it('GET /api/planners', async() => {
@@ -107,37 +214,5 @@ describe('get planner by id', () => {
         expect(planner.body).toBeDefined();
         expect(planner.body).toHaveProperty('message', 'planner does not exist');
     })
-    //tests that an id will return the wedding and planner as a single object
-    // it('GET /api/planners/:id', async() => {
-        
-    //     //setup
-    //     const user1 = await request(server)
-    //         .post('/api/auth/register')
-    //         .send({
-    //             username: 'testing1',
-    //             password: 'testing1',
-    //             home_location: 'tester',
-    //             email: 'testing1@t.com'
-    //         })
-        
-    //     const wedding = await request(server)
-    //         .post('/api/planner/weddings')
-    //         .send({
-    //             planner_id: 1,
-    //             wedding_name: 'testing wedding',
-    //             theme: 'testing',
-    //             wedding_location: 'MN',
-    //             description: 'hopefully this is a good thing to test, seems like a bit of overkill'
-    //         })
-    //         .set('authorization', user1.body.token)
-
-    //     const planner = await request(server)
-    //         .get('/api/planners/1')
-            
-
-    //     //tests that id validation middleware is working
-    //     expect(planner.status).toBe(200);
-    //     expect(wedding.token).toBeDefined();
-    // })
 })
 
