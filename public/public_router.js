@@ -50,6 +50,7 @@ router.get('/planners/:id', validateId, (req, res) => {
 
     Public.getPlannerById(id)
         .then(planner => {
+            console.log(planner)
             res.status(200).json(planner)
         })
         .catch(err => {

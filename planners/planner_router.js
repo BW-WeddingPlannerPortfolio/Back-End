@@ -11,6 +11,7 @@ router.get('/:id', validateId, (req, res) => {
 
     Profile.getPlannerById(id)
         .then(p => {
+            // console.log(p)
             res.status(200).json(p)
         })
         .catch(err => {
