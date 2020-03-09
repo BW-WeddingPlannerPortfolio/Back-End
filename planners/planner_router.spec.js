@@ -22,9 +22,9 @@ describe('Registers new wedding planner', () => {
         expect(newUser.body).toBeDefined();
         expect(newUser.body).not.toHaveProperty('planner', 'password');  
         expect(newUser.body).toHaveProperty('token');
-        expect(newUser.body).toHaveProperty('message', 'Welcome testing1!')
+        expect(newUser.body).toHaveProperty('message', 'Welcome testing1!');
         expect(newUser.body).toHaveProperty('newUser', 'planner', 'email', );
-        expect(newUser.body).toHaveProperty('newUser', 'planner', 'id', 1)  
+        expect(newUser.body).toHaveProperty('newUser', 'planner', 'id', 1);  
     })
     // tests that register middleware is working, but only for username
     it('POST /api/auth/register', async () => {

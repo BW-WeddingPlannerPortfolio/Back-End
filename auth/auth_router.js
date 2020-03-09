@@ -25,7 +25,7 @@ router.post('/register', validateSignup, validateEmail, (req, res) => {
         .catch(err => {
             console.log('error creating a new user', err)
             res.status(500).json({ errorMessage: 'error creating a new wedding planner' })
-        })
+        }) 
        
 })
 

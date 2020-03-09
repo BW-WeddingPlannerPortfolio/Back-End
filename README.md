@@ -1,5 +1,5 @@
 # Wedding Planner Portfolio
-Deployed Backend URL: https://wedding-planner-portfolio.herokuapp.com/
+Deployed Backend URL: https://wedding-port.herokuapp.com/
 
 This is a work-in-progress
 
